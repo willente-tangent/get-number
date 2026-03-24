@@ -6,14 +6,13 @@
     <title>忠县消防专职招录面试抽签</title>
     <style>
         :root {
-            /* 现代可爱配色 */
-            --primary-color: #FF6B6B; /* 主色：柔和红 */
-            --secondary-color: #4ECDC4; /* 辅助色：薄荷绿 */
-            --accent-color: #FFE66D; /* 强调色：鹅黄 */
-            --text-color: #2D3436; /* 文字色 */
-            --bg-color: #F7FFF7; /* 背景色 */
-            --panel-bg: #FFFFFF; /* 面板背景 */
-            --shadow: 0 8px 0 rgba(0,0,0,0.1); /* 扁平化阴影 */
+            --primary-color: #FF6B6B; 
+            --secondary-color: #4ECDC4; 
+            --accent-color: #FFE66D; 
+            --text-color: #2D3436; 
+            --bg-color: #F7FFF7; 
+            --panel-bg: #FFFFFF; 
+            --shadow: 0 8px 0 rgba(0,0,0,0.1); 
         }
 
         body {
@@ -29,24 +28,6 @@
             padding: 20px;
         }
 
-        /* 标题样式 */
-        h1 {
-            font-size: 32px;
-            color: var(--primary-color);
-            text-shadow: 2px 2px 0 var(--accent-color);
-            margin-bottom: 5px;
-            text-align: center;
-        }
-        
-        h2 {
-            font-size: 18px;
-            color: #666;
-            margin-top: 0;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        /* 主容器 */
         .main-container {
             background: var(--panel-bg);
             border: 4px solid var(--text-color);
@@ -58,9 +39,21 @@
             text-align: center;
         }
 
-        /* 数字显示区 */
+        h1 {
+            font-size: 28px;
+            color: var(--primary-color);
+            text-shadow: 2px 2px 0 var(--accent-color);
+            margin: 0 0 5px 0;
+        }
+        
+        h2 {
+            font-size: 18px;
+            color: #666;
+            margin: 0 0 30px 0;
+        }
+
         .display-area {
-            background-color: #F0F0F0;
+            background-color: #F9F9F9;
             border: 4px solid var(--text-color);
             border-radius: 16px;
             height: 150px;
@@ -69,15 +62,7 @@
             justify-content: center;
             margin-bottom: 30px;
             position: relative;
-        }
-
-        .display-area::before {
-            content: '编号';
-            position: absolute;
-            top: 5px;
-            left: 10px;
-            font-size: 14px;
-            color: #999;
+            overflow: hidden;
         }
 
         #result {
@@ -85,9 +70,9 @@
             font-weight: bold;
             color: var(--primary-color);
             text-shadow: 4px 4px 0 var(--text-color);
+            transition: transform 0.1s;
         }
 
-        /* 按钮样式 */
         .btn {
             font-family: inherit;
             font-size: 20px;
@@ -100,86 +85,62 @@
             cursor: pointer;
             transition: all 0.1s ease;
             box-shadow: 0 5px 0 var(--text-color);
-            margin: 10px;
-        }
-
-        .btn:hover {
-            background-color: #65e2d9;
-        }
-
-        .btn:active {
-            transform: translateY(3px);
-            box-shadow: 0 2px 0 var(--text-color);
-        }
-
-        .btn:disabled {
-            background-color: #bdc3c7;
-            color: #7f8c8d;
-            border-color: #7f8c8d;
-            box-shadow: 0 5px 0 #7f8c8d;
-            cursor: not-allowed;
-            transform: none;
-        }
-        
-        .btn-reset {
-            background-color: #fab1a0;
-            font-size: 16px;
-            padding: 10px 25px;
-        }
-        .btn-reset:hover {
-            background-color: #ff9f87;
-        }
-
-        /* 号码池样式 */
-        .pool-container {
-            margin-top: 40px;
+            margin-bottom: 10px;
             width: 100%;
-            max-width: 450px;
         }
 
+        .btn:hover { background-color: #65e2d9; }
+        .btn:active { transform: translateY(3px); box-shadow: 0 2px 0 var(--text-color); }
+        .btn:disabled {
+            background-color: #eee;
+            color: #aaa;
+            border-color: #ccc;
+            box-shadow: 0 5px 0 #ccc;
+            cursor: not-allowed;
+        }
+
+        .pool-container { margin-top: 30px; width: 100%; }
         .pool-title {
-            font-size: 16px;
+            font-size: 14px;
             font-weight: bold;
-            margin-bottom: 15px;
-            text-align: left;
+            margin-bottom: 10px;
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            color: #999;
         }
 
         .pool-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 10px;
+            gap: 8px;
         }
 
         .pool-item {
             background-color: white;
-            border: 3px solid var(--text-color);
-            border-radius: 12px;
+            border: 2px solid var(--text-color);
+            border-radius: 10px;
             aspect-ratio: 1;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: bold;
-            transition: all 0.2s;
-        }
-
-        .pool-item.active {
-            color: white;
-            background-color: var(--primary-color);
-            border-color: var(--text-color);
-            transform: scale(1.05);
         }
 
         .pool-item.used {
-            background-color: #e0e0e0;
-            color: #a0a0a0;
-            border-color: #a0a0a0;
+            background-color: #f0f0f0;
+            color: #ccc;
+            border-color: #ddd;
             text-decoration: line-through;
         }
 
+        .reset-link {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #bbb;
+            cursor: pointer;
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -189,113 +150,90 @@
         <h2>面试抽签 (1-14号)</h2>
 
         <div class="display-area">
-            <span id="result">?</span>
+            <div id="result">?</div>
         </div>
 
-        <button class="btn" id="drawBtn" onclick="draw()">✨ 点击抽签 ✨</button>
+        <button class="btn" id="drawBtn" onclick="startDraw()">✨ 点击开始抽签 ✨</button>
         
         <div class="pool-container">
-            <div class="pool-title">
-                <span>剩余号码池</span>
-                <button class="btn btn-reset" onclick="reset()">重置</button>
-            </div>
-            <div class="pool-grid" id="poolGrid">
-                </div>
+            <div class="pool-title">号码池状态</div>
+            <div class="pool-grid" id="poolGrid"></div>
         </div>
+
+        <div class="reset-link" onclick="reset()">重新开始新一轮抽签</div>
     </div>
 
     <script>
-        const totalNumbers = 14;
-        let numbersPool = [];
-        let usedNumbers = [];
-        let isDrawing = false;
+        let numbers = Array.from({length: 14}, (_, i) => i + 1);
+        let isRunning = false;
 
-        // 初始化号码池
-        function initPool() {
-            numbersPool = Array.from({length: totalNumbers}, (_, i) => i + 1);
-            usedNumbers = [];
-            document.getElementById('result').innerText = '?';
-            document.getElementById('result').style.color = 'var(--primary-color)';
-            document.getElementById('drawBtn').disabled = false;
-            document.getElementById('drawBtn').innerText = '✨ 点击抽签 ✨';
-            
+        function init() {
             const grid = document.getElementById('poolGrid');
             grid.innerHTML = '';
-            for (let i = 1; i <= totalNumbers; i++) {
-                const item = document.createElement('div');
-                item.className = 'pool-item';
-                item.id = `num-${i}`;
-                item.innerText = i;
-                grid.appendChild(item);
+            for(let i=1; i<=14; i++) {
+                const div = document.createElement('div');
+                div.className = 'pool-item';
+                div.id = 'item-' + i;
+                div.innerText = i;
+                grid.appendChild(div);
             }
         }
 
-        // 抽签函数
-        function draw() {
-            if (isDrawing || numbersPool.length === 0) return;
+        function startDraw() {
+            if (isRunning || numbers.length === 0) return;
             
-            isDrawing = true;
-            const drawBtn = document.getElementById('drawBtn');
-            const resultDisplay = document.getElementById('result');
-            drawBtn.disabled = true;
-            drawBtn.innerText = '正在抽签...';
+            isRunning = true;
+            const btn = document.getElementById('drawBtn');
+            const res = document.getElementById('result');
+            btn.disabled = true;
 
-            // 1. 简单的随机滚动动画
-            let animationTimer;
-            let counter = 0;
-            animationTimer = setInterval(() => {
-                const randomVisual = Math.floor(Math.random() * totalNumbers) + 1;
-                resultDisplay.innerText = randomVisual;
-                counter++;
-                
-                // 2. 动画结束，输出真实结果
-                if (counter > 15) { 
-                    clearInterval(animationTimer);
-                    finalizeDraw();
+            // 滚动效果
+            let count = 0;
+            const interval = setInterval(() => {
+                res.innerText = Math.floor(Math.random() * 14) + 1;
+                count++;
+                if (count > 15) {
+                    clearInterval(interval);
+                    finishDraw();
                 }
-            }, 60);
+            }, 50);
         }
 
-        function finalizeDraw() {
-            const drawBtn = document.getElementById('drawBtn');
-            const resultDisplay = document.getElementById('result');
+        function finishDraw() {
+            const res = document.getElementById('result');
+            const btn = document.getElementById('drawBtn');
             
-            // 随机选择一个索引
-            const randomIndex = Math.floor(Math.random() * numbersPool.length);
-            // 从池中移除并获取该号码
-            const luckyNumber = numbersPool.splice(randomIndex, 1)[0];
-            usedNumbers.push(luckyNumber);
+            // 真正随机抽取
+            const idx = Math.floor(Math.random() * numbers.length);
+            const lucky = numbers.splice(idx, 1)[0];
 
-            // 更新显示
-            resultDisplay.innerText = luckyNumber;
-            resultDisplay.style.color = var(--secondary-color); // 抽中后变色
-
-            // 更新号码池状态
-            document.getElementById(`num-${luckyNumber}`).classList.add('used');
-
-            isDrawing = false;
+            res.innerText = lucky;
+            res.style.color = "#4ECDC4"; // 抽中后变为薄荷绿
             
-            // 检查是否抽完
-            if (numbersPool.length === 0) {
-                drawBtn.disabled = true;
-                drawBtn.innerText = '全部抽完';
-                resultDisplay.style.color = '#bdc3c7'; // 最终变灰
+            // 标记已使用
+            document.getElementById('item-' + lucky).className = 'pool-item used';
+
+            isRunning = false;
+            if (numbers.length > 0) {
+                btn.disabled = false;
+                btn.innerText = '抽取下一个';
             } else {
-                drawBtn.disabled = false;
-                drawBtn.innerText = '继续抽签';
+                btn.innerText = '抽签已完成';
             }
         }
 
-        // 重置功能
         function reset() {
-            if (confirm('确定要重置所有抽签记录吗？')) {
-                initPool();
+            if(confirm('确定要清空当前记录并重新开始吗？')) {
+                numbers = Array.from({length: 14}, (_, i) => i + 1);
+                document.getElementById('result').innerText = '?';
+                document.getElementById('result').style.color = '#FF6B6B';
+                document.getElementById('drawBtn').disabled = false;
+                document.getElementById('drawBtn').innerText = '✨ 点击开始抽签 ✨';
+                init();
             }
         }
 
-        // 页面加载时初始化
-        initPool();
-
+        init();
     </script>
 </body>
 </html>
